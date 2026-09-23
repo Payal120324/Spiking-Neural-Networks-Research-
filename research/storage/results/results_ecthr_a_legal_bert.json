@@ -1,0 +1,314 @@
+{
+  "dataset_key": "ecthr_a",
+  "dataset_info": {
+    "dataset_info": {
+      "hf_name": "coastalcph/lex_glue",
+      "hf_config": "ecthr_a",
+      "task": "multi_label",
+      "text_col": "text",
+      "label_col": "labels",
+      "description": "ECtHR-A \u2014 European Court of Human Rights articles (LexGLUE)"
+    },
+    "splits": {
+      "train": {
+        "split": "train",
+        "n_samples": 2000,
+        "n_classes": 10,
+        "is_multilabel": true,
+        "avg_labels_per_sample": 1.193,
+        "label_distribution": {
+          "4": 166,
+          "3": 1292,
+          "6": 60,
+          "0": 63,
+          "2": 225,
+          "1": 126,
+          "7": 20,
+          "9": 391,
+          "5": 8,
+          "8": 35
+        },
+        "class_imbalance_ratio": 161.5,
+        "word_stats": {
+          "mean": 1326.9535,
+          "median": 715.5,
+          "max": 35973,
+          "min": 105,
+          "std": 1964.0851367335758
+        },
+        "char_stats": {
+          "mean": 7959.0995,
+          "max": 213203
+        },
+        "token_stats": {
+          "mean": 1725.0395500000002,
+          "median": 930.15,
+          "max": 46764,
+          "pct_over_512": 0.7115
+        }
+      },
+      "test": {
+        "split": "test",
+        "n_samples": 10,
+        "n_classes": 4,
+        "is_multilabel": true,
+        "avg_labels_per_sample": 1.0,
+        "label_distribution": {
+          "6": 1,
+          "4": 2,
+          "3": 5,
+          "1": 2
+        },
+        "class_imbalance_ratio": 5.0,
+        "word_stats": {
+          "mean": 1647.2,
+          "median": 1422.5,
+          "max": 4749,
+          "min": 303,
+          "std": 1232.6083562916488
+        },
+        "char_stats": {
+          "mean": 9891.6,
+          "max": 28318
+        },
+        "token_stats": {
+          "mean": 2141.36,
+          "median": 1849.25,
+          "max": 6173,
+          "pct_over_512": 0.9
+        }
+      },
+      "validation": {
+        "split": "validation",
+        "n_samples": 10,
+        "n_classes": 5,
+        "is_multilabel": true,
+        "avg_labels_per_sample": 1.3,
+        "label_distribution": {
+          "1": 5,
+          "3": 3,
+          "7": 2,
+          "2": 2,
+          "0": 1
+        },
+        "class_imbalance_ratio": 5.0,
+        "word_stats": {
+          "mean": 2059.9,
+          "median": 1888.5,
+          "max": 4547,
+          "min": 312,
+          "std": 1185.0425688556509
+        },
+        "char_stats": {
+          "mean": 12354.7,
+          "max": 27094
+        },
+        "token_stats": {
+          "mean": 2677.8700000000003,
+          "median": 2455.05,
+          "max": 5911,
+          "pct_over_512": 0.9
+        }
+      }
+    },
+    "global": {
+      "split": "all",
+      "n_samples": 2020,
+      "n_classes": 10,
+      "is_multilabel": true,
+      "avg_labels_per_sample": 1.1925742574257425,
+      "label_distribution": {
+        "4": 168,
+        "3": 1300,
+        "6": 61,
+        "0": 64,
+        "2": 227,
+        "1": 133,
+        "7": 22,
+        "9": 391,
+        "5": 8,
+        "8": 35
+      },
+      "class_imbalance_ratio": 162.5,
+      "word_stats": {
+        "mean": 1332.1673267326732,
+        "median": 721.5,
+        "max": 35973,
+        "min": 105,
+        "std": 1958.838829794497
+      },
+      "char_stats": {
+        "mean": 7990.426732673267,
+        "max": 213203
+      },
+      "token_stats": {
+        "mean": 1731.8175247524753,
+        "median": 937.95,
+        "max": 46764,
+        "pct_over_512": 0.7133663366336633
+      }
+    }
+  },
+  "embeddings_shape": {
+    "train": [
+      2000,
+      768
+    ],
+    "test": [
+      10,
+      768
+    ],
+    "validation": [
+      10,
+      768
+    ]
+  },
+  "classification": {},
+  "domain_shift": {
+    "transformer": {
+      "avg_accuracy_drop": -0.17222222222222228,
+      "avg_target_accuracy": 0.5833333333333334,
+      "avg_h_score": 0.4823091247672253,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "transformer",
+          "source_accuracy": 0.4111111111111111,
+          "source_f1_macro": 0.1131833780209643,
+          "target_accuracy": 0.5833333333333334,
+          "target_f1_macro": 0.3453022980208944,
+          "accuracy_drop": -0.17222222222222228,
+          "f1_drop": -0.23211891999993012,
+          "relative_drop_pct": -41.89189189189191,
+          "h_score": 0.4823091247672253
+        }
+      ]
+    },
+    "snn_poisson_rate": {
+      "avg_accuracy_drop": -0.17666666666666664,
+      "avg_target_accuracy": 0.5766666666666667,
+      "avg_h_score": 0.4723549488054608,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "snn_poisson_rate",
+          "source_accuracy": 0.4,
+          "source_f1_macro": 0.11587801256751029,
+          "target_accuracy": 0.5766666666666667,
+          "target_f1_macro": 0.33304159446509146,
+          "accuracy_drop": -0.17666666666666664,
+          "f1_drop": -0.21716358189758117,
+          "relative_drop_pct": -44.16666666666666,
+          "h_score": 0.4723549488054608
+        }
+      ]
+    },
+    "snn_latency": {
+      "avg_accuracy_drop": -0.17222222222222228,
+      "avg_target_accuracy": 0.5833333333333334,
+      "avg_h_score": 0.4823091247672253,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "snn_latency",
+          "source_accuracy": 0.4111111111111111,
+          "source_f1_macro": 0.11414031582000736,
+          "target_accuracy": 0.5833333333333334,
+          "target_f1_macro": 0.34599100325505416,
+          "accuracy_drop": -0.17222222222222228,
+          "f1_drop": -0.2318506874350468,
+          "relative_drop_pct": -41.89189189189191,
+          "h_score": 0.4823091247672253
+        }
+      ]
+    },
+    "snn_temporal": {
+      "avg_accuracy_drop": -0.18333333333333335,
+      "avg_target_accuracy": 0.5833333333333334,
+      "avg_h_score": 0.4745762711864407,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "snn_temporal",
+          "source_accuracy": 0.4,
+          "source_f1_macro": 0.09125563095170212,
+          "target_accuracy": 0.5833333333333334,
+          "target_f1_macro": 0.3420946900733571,
+          "accuracy_drop": -0.18333333333333335,
+          "f1_drop": -0.25083905912165494,
+          "relative_drop_pct": -45.833333333333336,
+          "h_score": 0.4745762711864407
+        }
+      ]
+    },
+    "snn_population": {
+      "avg_accuracy_drop": -0.18333333333333335,
+      "avg_target_accuracy": 0.5833333333333334,
+      "avg_h_score": 0.4745762711864407,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "snn_population",
+          "source_accuracy": 0.4,
+          "source_f1_macro": 0.11380377783268814,
+          "target_accuracy": 0.5833333333333334,
+          "target_f1_macro": 0.34636374764119543,
+          "accuracy_drop": -0.18333333333333335,
+          "f1_drop": -0.2325599698085073,
+          "relative_drop_pct": -45.833333333333336,
+          "h_score": 0.4745762711864407
+        }
+      ]
+    },
+    "snn_binary_threshold": {
+      "avg_accuracy_drop": -0.17888888888888888,
+      "avg_target_accuracy": 0.59,
+      "avg_h_score": 0.4845726970033296,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "ecthr_a",
+          "target": "ecthr_b",
+          "model_type": "snn_binary_threshold",
+          "source_accuracy": 0.4111111111111111,
+          "source_f1_macro": 0.09774865774865776,
+          "target_accuracy": 0.59,
+          "target_f1_macro": 0.3410202866821739,
+          "accuracy_drop": -0.17888888888888888,
+          "f1_drop": -0.24327162893351612,
+          "relative_drop_pct": -43.513513513513516,
+          "h_score": 0.4845726970033296
+        }
+      ]
+    },
+    "_ranking_by_robustness": [
+      "snn_temporal",
+      "snn_population",
+      "snn_binary_threshold",
+      "snn_poisson_rate",
+      "transformer",
+      "snn_latency"
+    ],
+    "_embedding_shift": {
+      "source": "ecthr_a",
+      "target": "ecthr_b",
+      "centroid_distance": 1.751767013047356e-05,
+      "centroid_cosine_similarity": 1.0000001192092896,
+      "mmd": -1.1920928955078125e-07,
+      "source_variance": 0.07095601409673691,
+      "target_variance": 0.07095605134963989,
+      "variance_ratio": 1.000000525014031
+    }
+  },
+  "report": "storage\\results\\reports\\report_ecthr_a_legal_bert.html"
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text Classification</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 1100px; margin: 0 auto; padding: 40px 20px;
+         background: #fafafa; color: #1a1a2e; }
+  h1 { color: #1a1a2e; border-bottom: 3px solid #4a90d9; padding-bottom: 10px; }
+  h2 { color: #16213e; border-bottom: 1px solid #ddd; padding-bottom: 6px; margin-top: 40px; }
+  h3 { color: #0f3460; margin-top: 25px; }
+  .meta { background: #e8f4f8; padding: 12px 20px; border-radius: 6px; margin-bottom: 30px;
+           font-size: 0.9em; color: #555; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+  th { background: #1a1a2e; color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 8px 14px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #f5f5f5; }
+  .metric-card { display: inline-block; background: white; border: 1px solid #ddd;
+                 border-radius: 8px; padding: 16px 24px; margin: 8px;
+                 min-width: 160px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+  .metric-value { font-size: 2em; font-weight: bold; color: #4a90d9; }
+  .metric-label { font-size: 0.8em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .figure { text-align: center; margin: 20px 0; }
+  .figure img { max-width: 100%; border: 1px solid #eee; border-radius: 4px; }
+  .figure-caption { font-size: 0.85em; color: #666; margin-top: 8px; }
+  .hypothesis { background: #fff8e1; border-left: 4px solid #ffc107; padding: 12px 16px;
+                margin: 12px 0; border-radius: 0 6px 6px 0; }
+  .hypothesis.supported { border-color: #4caf50; background: #f1f8e9; }
+  .hypothesis.partial { border-color: #ff9800; background: #fff3e0; }
+  .finding { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px 16px;
+             margin: 12px 0; border-radius: 0 6px 6px 0; }
+  code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+  .toc { background: #fff; border: 1px solid #ddd; padding: 16px 24px; border-radius: 6px;
+         margin-bottom: 30px; }
+  .toc ul { margin: 0; padding-left: 20px; }
+  .toc li { margin: 4px 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee;
+           font-size: 0.8em; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+<h1>A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text Classification</h1>
+<div class="meta">Generated: 2026-08-25 15:06:44 &bull; Framework: Spike-Legal-NLP v1.0</div>
+<div class="toc"><h3>Contents</h3><ul><li><a href="#classification">Classification Results</a></li><li><a href="#semantic">Semantic Preservation</a></li><li><a href="#energy">Energy Analysis</a></li><li><a href="#domain">Domain Shift</a></li><li><a href="#hypotheses">Hypothesis Evaluation</a></li></ul></div>
+<h2>Research Overview</h2>
+<p>This report presents results from the <em>Spike Encoding for Legal Text Classification</em> research framework. The study compares transformer-based baselines (LegalBERT, BERT) with spiking neural networks (SNNs) using five spike encoding strategies, evaluated on legal NLP datasets from LexGLUE.</p>
+<h2 id="limitations">Limitations and Caveats</h2>
+<div class="finding">
+<strong>Dataset Size:</strong> 
+The small dataset size may limit statistical power and generalizability of results.
+<br><br>
+<strong>Energy Model:</strong> Energy estimates are theoretical calculations based on the MAC (Multiply-Accumulate) and SOP (Synaptic Operation) energy models from Horowitz (2014) and Davies (2018). These are NOT measured on physical neuromorphic hardware. Actual energy consumption may vary significantly depending on hardware implementation, memory access patterns, and system-level factors.
+<br><br>
+<strong>Stochastic Encodings:</strong> Poisson-based encodings are stochastic, so repeated runs produce different efficiency numbers. Multi-seed averaging is recommended for robust estimates.
+</div>
+<h3>Experiment Configuration</h3>
+<table><tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Time Steps</td><td><code>50</code></td></tr>
+<tr><td>SNN Hidden Size</td><td><code>384</code></td></tr>
+<tr><td>SNN Epochs</td><td><code>30</code></td></tr>
+<tr><td>SNN Beta (LIF)</td><td><code>0.95</code></td></tr>
+<tr><td>Max Sequence Length</td><td><code>512</code></td></tr>
+</table>
+<h2 id="classification">Classification Results</h2>
+<div class="finding">These results compare transformer-based linear probes with SNN classifiers trained on spike-encoded embeddings.</div>
+<table><tr><th>Model / Encoding</th><th>Accuracy</th><th>F1 Macro</th><th>F1 Micro</th></tr>
+</table>
+<h2 id="semantic">Semantic Preservation Analysis</h2>
+<div class="finding">Measures how well spike encodings preserve the semantic geometry of the original transformer embeddings.</div>
+<table><tr><th>Encoding</th><th>Cosine Similarity</th><th>Spearman ρ</th><th>Kendall τ</th><th>Top-10 NN</th></tr>
+<tr><td><code>poisson_rate</code></td><td>0.9946</td><td>0.9407</td><td>0.7921</td><td>0.1840</td></tr>
+<tr><td><code>latency</code></td><td>0.9997</td><td>0.9976</td><td>0.9657</td><td>0.8585</td></tr>
+<tr><td><code>temporal</code></td><td>0.9997</td><td>0.9989</td><td>0.9750</td><td>0.8415</td></tr>
+<tr><td><code>population</code></td><td>0.9994</td><td>0.9943</td><td>0.9436</td><td>0.7625</td></tr>
+<tr><td><code>binary_threshold</code></td><td>0.5723</td><td>0.4929</td><td>0.3483</td><td>0.6120</td></tr>
+</table>
+<h2 id="energy">Energy Analysis</h2>
+<div class="finding">Energy estimates based on Horowitz (2014): 4.6 pJ/MAC (GPU), 0.9 pJ/SOP (neuromorphic), 100 pJ/DRAM-access.</div>
+<div style="margin:20px 0">
+<div class="metric-card"><div class="metric-value">5591.1×</div><div class="metric-label">poisson rate<br>efficiency</div></div>
+<div class="metric-card"><div class="metric-value">250503.6×</div><div class="metric-label">latency<br>efficiency</div></div>
+<div class="metric-card"><div class="metric-value">250145.1×</div><div class="metric-label">temporal<br>efficiency</div></div>
+<div class="metric-card"><div class="metric-value">2226.4×</div><div class="metric-label">population<br>efficiency</div></div>
+<div class="metric-card"><div class="metric-value">15931.0×</div><div class="metric-label">binary threshold<br>efficiency</div></div>
+</div>
+<h3>Consolidated Results Summary</h3>
+<table><tr><th>Encoding</th><th>Accuracy</th><th>F1 Macro</th><th>Sparsity (%)</th><th>Energy Ratio</th><th>Energy Savings (%)</th><th>Semantic Score</th></tr>
+<tr ><td><code>poisson_rate</code></td><td>0.1840</td><td>0.0071</td><td>35.8</td><td>5591.1</td><td>100.0</td><td>0.9946</td></tr>
+<tr style="background-color: #fff3cd;"><td><code>latency</code> ⚠️</td><td>0.1750</td><td>0.0068</td><td>98.0</td><td>250503.6</td><td>100.0</td><td>0.9997</td></tr>
+<tr style="background-color: #fff3cd;"><td><code>temporal</code> ⚠️</td><td>0.1920</td><td>0.0122</td><td>98.0</td><td>250145.1</td><td>100.0</td><td>0.9997</td></tr>
+<tr ><td><code>population</code></td><td>0.1890</td><td>0.0112</td><td>43.4</td><td>2226.4</td><td>100.0</td><td>0.9994</td></tr>
+<tr ><td><code>binary_threshold</code></td><td>0.2930</td><td>0.0598</td><td>72.5</td><td>15931.0</td><td>100.0</td><td>0.5723</td></tr>
+</table>
+<h3>Detailed Energy Breakdown</h3>
+<table><tr><th>Encoding</th><th>SNN Compute (µJ)</th><th>SNN Memory (µJ)</th><th>SNN Total (µJ)</th><th>vs Transformer</th></tr>
+<tr><td><code>poisson_rate</code></td><td>19.8077</td><td>18.9371</td><td>38.7448</td><td>−100.0%</td></tr>
+<tr><td><code>latency</code></td><td>0.2758</td><td>0.5890</td><td>0.8648</td><td>−100.0%</td></tr>
+<tr><td><code>temporal</code></td><td>0.2762</td><td>0.5898</td><td>0.8660</td><td>−100.0%</td></tr>
+<tr><td><code>population</code></td><td>80.6083</td><td>16.6910</td><td>97.2994</td><td>−100.0%</td></tr>
+<tr><td><code>binary_threshold</code></td><td>5.4769</td><td>8.1209</td><td>13.5978</td><td>−100.0%</td></tr>
+<tr style='font-weight:bold'><td>Transformer (baseline)</td><td>211151.3297</td><td>5474.1120</td><td>216625.4417</td><td>—</td></tr>
+</table>
+<h2 id="domain">Domain Shift Evaluation</h2>
+<p>Models ranked by robustness (lowest accuracy drop): <strong>transformer &gt; snn_latency &gt; snn_temporal &gt; snn_binary_threshold &gt; snn_population &gt; snn_poisson_rate</strong></p>
+<table><tr><th>Model</th><th>Avg Accuracy Drop</th><th>Avg Target Acc</th><th>Avg H-Score</th></tr>
+<tr><td><code>transformer</code></td><td>0.3667</td><td>0.6333</td><td>0.7755</td></tr>
+<tr><td><code>snn_poisson_rate</code></td><td>0.6133</td><td>0.3867</td><td>0.5577</td></tr>
+<tr><td><code>snn_latency</code></td><td>0.3667</td><td>0.6333</td><td>0.7755</td></tr>
+<tr><td><code>snn_temporal</code></td><td>0.3667</td><td>0.6333</td><td>0.7755</td></tr>
+<tr><td><code>snn_population</code></td><td>0.4467</td><td>0.5533</td><td>0.7124</td></tr>
+<tr><td><code>snn_binary_threshold</code></td><td>0.3667</td><td>0.6333</td><td>0.7755</td></tr>
+</table>
+<h2 id="hypotheses">Hypothesis Evaluation</h2>
+<div class="hypothesis supported"><strong>H2 — ✓ Supported</strong><br>Time-based encodings preserve semantics better than rate coding.<br><em>Poisson rate cos=0.9946, best temporal cos=0.9997</em></div>
+<div class="hypothesis supported"><strong>H3 — ✓ Supported</strong><br>Energy improvements exist but shrink when memory access is included.<br><em>Compute-only ratio=10660.1×, total ratio=5591.1×</em></div>
+<div class="hypothesis supported"><strong>H4 — ✓ Supported</strong><br>Domain shift affects all models differently.<br><em>Accuracy drop range: 0.3667–0.6133 (variation=0.2467)</em></div>
+<footer>Generated by Spike-Legal-NLP Research Framework &bull; 2026-08-25 15:06:44</footer>
+</body>
+</html>

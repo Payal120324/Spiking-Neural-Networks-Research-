@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text Classification Under Domain Shift</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 1100px; margin: 0 auto; padding: 40px 20px;
+         background: #fafafa; color: #1a1a2e; }
+  h1 { color: #1a1a2e; border-bottom: 3px solid #4a90d9; padding-bottom: 10px; }
+  h2 { color: #16213e; border-bottom: 1px solid #ddd; padding-bottom: 6px; margin-top: 40px; }
+  h3 { color: #0f3460; margin-top: 25px; }
+  .meta { background: #e8f4f8; padding: 12px 20px; border-radius: 6px; margin-bottom: 30px;
+           font-size: 0.9em; color: #555; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+  th { background: #1a1a2e; color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 8px 14px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #f5f5f5; }
+  .metric-card { display: inline-block; background: white; border: 1px solid #ddd;
+                 border-radius: 8px; padding: 16px 24px; margin: 8px;
+                 min-width: 160px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+  .metric-value { font-size: 2em; font-weight: bold; color: #4a90d9; }
+  .metric-label { font-size: 0.8em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .figure { text-align: center; margin: 20px 0; }
+  .figure img { max-width: 100%; border: 1px solid #eee; border-radius: 4px; }
+  .figure-caption { font-size: 0.85em; color: #666; margin-top: 8px; }
+  .hypothesis { background: #fff8e1; border-left: 4px solid #ffc107; padding: 12px 16px;
+                margin: 12px 0; border-radius: 0 6px 6px 0; }
+  .hypothesis.supported { border-color: #4caf50; background: #f1f8e9; }
+  .hypothesis.partial { border-color: #ff9800; background: #fff3e0; }
+  .finding { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px 16px;
+             margin: 12px 0; border-radius: 0 6px 6px 0; }
+  code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+  .toc { background: #fff; border: 1px solid #ddd; padding: 16px 24px; border-radius: 6px;
+         margin-bottom: 30px; }
+  .toc ul { margin: 0; padding-left: 20px; }
+  .toc li { margin: 4px 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee;
+           font-size: 0.8em; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+<h1>A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text Classification Under Domain Shift</h1>
+<div class="meta">Generated: 2026-09-16 10:53:06 &bull; Framework: Spike-Legal-NLP v1.0</div>
+<div class="toc"><h3>Contents</h3><ul><li><a href="#domain">Domain Shift</a></li><li><a href="#figures">Figures</a></li><li><a href="#hypotheses">Hypothesis Evaluation</a></li></ul></div>
+<h2>Research Overview</h2>
+<p>This report presents results from the <em>Spike Encoding for Legal Text Classification</em> research framework. The study compares transformer-based baselines (LegalBERT, BERT) with spiking neural networks (SNNs) using five spike encoding strategies, evaluated on legal NLP datasets from LexGLUE.</p>
+<h2 id="limitations">Limitations and Caveats</h2>
+<div class="finding">
+<strong>Dataset Size:</strong> 
+The small dataset size may limit statistical power and generalizability of results.
+<br><br>
+<strong>Energy Model:</strong> Energy estimates are theoretical calculations based on the MAC (Multiply-Accumulate) and SOP (Synaptic Operation) energy models from Horowitz (2014) and Davies (2018). These are NOT measured on physical neuromorphic hardware. Actual energy consumption may vary significantly depending on hardware implementation, memory access patterns, and system-level factors.
+<br><br>
+<strong>Stochastic Encodings:</strong> Poisson-based encodings are stochastic, so repeated runs produce different efficiency numbers. Multi-seed averaging is recommended for robust estimates.
+</div>
+<h3>Experiment Configuration</h3>
+<table><tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Time Steps</td><td><code>75</code></td></tr>
+<tr><td>SNN Hidden Size</td><td><code>512</code></td></tr>
+<tr><td>SNN Epochs</td><td><code>40</code></td></tr>
+<tr><td>SNN Beta (LIF)</td><td><code>0.99</code></td></tr>
+<tr><td>Max Sequence Length</td><td><code>512</code></td></tr>
+</table>
+<h2 id="domain">Domain Shift Evaluation</h2>
+<p>Models ranked by robustness (lowest accuracy drop): <strong>snn_temporal &gt; snn_population &gt; snn_binary_threshold &gt; snn_poisson_rate &gt; transformer &gt; snn_latency</strong></p>
+<table><tr><th>Model</th><th>Avg Accuracy Drop</th><th>Avg Target Acc</th><th>Avg H-Score</th></tr>
+<tr><td><code>transformer</code></td><td>-0.1722</td><td>0.5833</td><td>0.4823</td></tr>
+<tr><td><code>snn_poisson_rate</code></td><td>-0.1767</td><td>0.5767</td><td>0.4724</td></tr>
+<tr><td><code>snn_latency</code></td><td>-0.1722</td><td>0.5833</td><td>0.4823</td></tr>
+<tr><td><code>snn_temporal</code></td><td>-0.1833</td><td>0.5833</td><td>0.4746</td></tr>
+<tr><td><code>snn_population</code></td><td>-0.1833</td><td>0.5833</td><td>0.4746</td></tr>
+<tr><td><code>snn_binary_threshold</code></td><td>-0.1789</td><td>0.5900</td><td>0.4846</td></tr>
+</table>
+<h2 id="figures">Figures</h2>
+<div class="figure"><p><a href="..\figures\encoding_comparison_rasters.pdf">[PDF Figure: Encoding Comparison Rasters]</a></p></div>
+<div class="figure"><p><a href="..\figures\firing_rates.pdf">[PDF Figure: Firing Rates]</a></p></div>
+<div class="figure"><p><a href="..\figures\embedding_scatter.pdf">[PDF Figure: Embedding Scatter]</a></p></div>
+<h2 id="hypotheses">Hypothesis Evaluation</h2>
+<div class="hypothesis partial"><strong>H4 — ⚠ Partial</strong><br>Domain shift affects all models differently.<br><em>Accuracy drop range: -0.1833–-0.1722 (variation=0.0111)</em></div>
+<footer>Generated by Spike-Legal-NLP Research Framework &bull; 2026-09-16 10:53:06</footer>
+</body>
+</html>

@@ -1,0 +1,153 @@
+{
+  "title": "A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text Classification Under Domain Shift",
+  "timestamp": "2026-09-15 12:22:53",
+  "classification": {},
+  "semantic": {},
+  "energy": {},
+  "domain_shift": {
+    "transformer": {
+      "avg_accuracy_drop": 0.12444444444444444,
+      "avg_target_accuracy": 0.08666666666666667,
+      "avg_h_score": 0.12288557213930347,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "transformer",
+          "source_accuracy": 0.2111111111111111,
+          "source_f1_macro": 0.2096068796068796,
+          "target_accuracy": 0.08666666666666667,
+          "target_f1_macro": 0.03190184049079754,
+          "accuracy_drop": 0.12444444444444444,
+          "f1_drop": 0.17770503911608204,
+          "relative_drop_pct": 58.94736842105262,
+          "h_score": 0.12288557213930347
+        }
+      ]
+    },
+    "snn_poisson_rate": {
+      "avg_accuracy_drop": 0.06999999999999999,
+      "avg_target_accuracy": 0.09666666666666666,
+      "avg_h_score": 0.12236286919831224,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "snn_poisson_rate",
+          "source_accuracy": 0.16666666666666666,
+          "source_f1_macro": 0.16319915642765453,
+          "target_accuracy": 0.09666666666666666,
+          "target_f1_macro": 0.03525835866261398,
+          "accuracy_drop": 0.06999999999999999,
+          "f1_drop": 0.12794079776504055,
+          "relative_drop_pct": 42.0,
+          "h_score": 0.12236286919831224
+        }
+      ]
+    },
+    "snn_latency": {
+      "avg_accuracy_drop": 0.09111111111111111,
+      "avg_target_accuracy": 0.12,
+      "avg_h_score": 0.15302013422818792,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "snn_latency",
+          "source_accuracy": 0.2111111111111111,
+          "source_f1_macro": 0.20719655616207344,
+          "target_accuracy": 0.12,
+          "target_f1_macro": 0.04285714285714286,
+          "accuracy_drop": 0.09111111111111111,
+          "f1_drop": 0.16433941330493057,
+          "relative_drop_pct": 43.15789473684211,
+          "h_score": 0.15302013422818792
+        }
+      ]
+    },
+    "snn_temporal": {
+      "avg_accuracy_drop": 0.11333333333333331,
+      "avg_target_accuracy": 0.05333333333333334,
+      "avg_h_score": 0.0808080808080808,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "snn_temporal",
+          "source_accuracy": 0.16666666666666666,
+          "source_f1_macro": 0.1573754522008748,
+          "target_accuracy": 0.05333333333333334,
+          "target_f1_macro": 0.020253164556962026,
+          "accuracy_drop": 0.11333333333333331,
+          "f1_drop": 0.13712228764391277,
+          "relative_drop_pct": 68.0,
+          "h_score": 0.0808080808080808
+        }
+      ]
+    },
+    "snn_population": {
+      "avg_accuracy_drop": 0.06,
+      "avg_target_accuracy": 0.14,
+      "avg_h_score": 0.1647058823529412,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "snn_population",
+          "source_accuracy": 0.2,
+          "source_f1_macro": 0.20206395406395403,
+          "target_accuracy": 0.14,
+          "target_f1_macro": 0.04912280701754386,
+          "accuracy_drop": 0.06,
+          "f1_drop": 0.15294114704641015,
+          "relative_drop_pct": 30.0,
+          "h_score": 0.1647058823529412
+        }
+      ]
+    },
+    "snn_binary_threshold": {
+      "avg_accuracy_drop": 0.1288888888888889,
+      "avg_target_accuracy": 0.06,
+      "avg_h_score": 0.09107142857142857,
+      "n_transfers": 1,
+      "per_transfer": [
+        {
+          "source": "case_hold",
+          "target": "ecthr_a",
+          "model_type": "snn_binary_threshold",
+          "source_accuracy": 0.18888888888888888,
+          "source_f1_macro": 0.18107142857142858,
+          "target_accuracy": 0.06,
+          "target_f1_macro": 0.022641509433962266,
+          "accuracy_drop": 0.1288888888888889,
+          "f1_drop": 0.15842991913746632,
+          "relative_drop_pct": 68.23529411764706,
+          "h_score": 0.09107142857142857
+        }
+      ]
+    },
+    "_ranking_by_robustness": [
+      "snn_population",
+      "snn_poisson_rate",
+      "snn_latency",
+      "snn_temporal",
+      "transformer",
+      "snn_binary_threshold"
+    ],
+    "_embedding_shift": {
+      "source": "case_hold",
+      "target": "ecthr_a",
+      "centroid_distance": 8.21447467803955,
+      "centroid_cosine_similarity": 0.7872963547706604,
+      "mmd": 0.14084947109222412,
+      "source_variance": 0.13448075950145721,
+      "target_variance": 0.07095601409673691,
+      "variance_ratio": 0.5276294866253194
+    }
+  }
+}

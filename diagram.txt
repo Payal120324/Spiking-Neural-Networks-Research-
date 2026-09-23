@@ -1,0 +1,104 @@
+
+                                    USER
+                                      │
+                                      ▼
+                         Research Dashboard / CLI
+                                      │
+                                      ▼
+                            Experiment Manager
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        │                             │                             │
+        ▼                             ▼                             ▼
+ Dataset Selection              Experiment Config            Previous Results
+        │                             │
+        └───────────────┬─────────────┘
+                        ▼
+               Hugging Face Dataset Loader
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+        ▼               ▼                ▼
+     CaseHOLD        ECtHR-A         ECtHR-B
+                        │
+                        ▼
+                  Dataset Cache
+                        │
+                        ▼
+                  Data Preprocessing
+                        │
+        ┌───────────────┼────────────────────────┐
+        │               │                        │
+        ▼               ▼                        ▼
+   Cleaning        Tokenization            Normalization
+                        │
+                        ▼
+                Embedding Generation
+                        │
+        ┌───────────────┼────────────────────────────────┐
+        │               │                │               │
+        ▼               ▼                ▼               ▼
+    LegalBERT         BERT          RoBERTa        Sentence-BERT
+                        │
+                        ▼
+                 Shared Embedding Space
+                        │
+        ┌───────────────┴──────────────────────────────────────────┐
+        │                                                          │
+        ▼                                                          ▼
+ Transformer Pipeline                                  Spike Encoding Pipeline
+        │                                                          │
+        │                                          ┌───────────────┼──────────────┐
+        │                                          │               │              │
+        │                                          ▼               ▼              ▼
+        │                                   Poisson Rate      Latency      Temporal
+        │                                          │               │              │
+        │                                          └───────┬───────┴──────────────┘
+        │                                                  │
+        │                                                  ▼
+        │                                          Spike Train Generation
+        │                                                  │
+        ▼                                                  ▼
+ Transformer Model Training                     SNN Model Training
+ (LegalBERT/BERT/RoBERTa)               (snnTorch / Norse / SpikingJelly)
+        │                                                  │
+        └──────────────────────────────┬───────────────────┘
+                                       ▼
+                              Model Evaluation
+                                       │
+        ┌───────────────┬──────────────┼──────────────┬─────────────────┐
+        │               │              │              │                 │
+        ▼               ▼              ▼              ▼                 ▼
+ Classification   Semantic      Energy Analysis   Domain Shift   Explainability
+   Metrics       Preservation                      Evaluation
+        │               │              │              │                 │
+ Accuracy      Cosine Similarity   Spike Count   Cross Dataset   Attention Maps
+ Precision     Euclidean           Memory Cost   Robustness      Spike Raster
+ Recall        CKA Score           CPU/GPU       Transfer Score  Saliency Maps
+ F1 Score      RSA                Latency
+        │               │              │              │                 │
+        └───────────────┴──────────────┴──────────────┴─────────────────┘
+                                       │
+                                       ▼
+                            Result Aggregation
+                                       │
+                                       ▼
+                          Visualization & Analytics
+                                       │
+        ┌───────────────┬──────────────┬──────────────┬──────────────┐
+        │               │              │              │
+        ▼               ▼              ▼              ▼
+ Training Curves   Confusion Matrix   ROC/PR      Energy Charts
+ t-SNE / UMAP      Heatmaps           Radar       Domain Shift
+                                       │
+                                       ▼
+                           Automatic Report Generation
+                                       │
+        ┌───────────────┬──────────────┬──────────────┬──────────────┐
+        │               │              │              │
+        ▼               ▼              ▼              ▼
+      PDF             LaTeX          CSV           JSON
+                                       │
+                                       ▼
+                     Publication-Ready Research Results
+

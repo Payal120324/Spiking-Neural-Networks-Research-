@@ -1,0 +1,217 @@
+# =====================================================================
+# Research Framework Configuration
+# A Semantic- and Energy-Aware Study of Spike Encoding for Legal Text
+# Classification Under Domain Shift
+# =====================================================================
+
+project:
+  name: "Spike-Legal-NLP"
+  description: "Spike Encoding for Legal Text Classification"
+  output_dir: "storage/results"
+  log_level: "INFO"
+
+# ─────────────────────────────────────────────────────────────────────
+# Storage
+# ─────────────────────────────────────────────────────────────────────
+storage:
+  datasets_raw: "storage/datasets/raw"
+  datasets_processed: "storage/datasets/processed"
+  datasets_cache: "storage/datasets/cache"
+  embeddings_cache: "storage/embeddings"
+  checkpoints: "storage/checkpoints"
+  results: "storage/results"
+  figures: "storage/results/figures"
+  reports: "storage/results/reports"
+
+# ─────────────────────────────────────────────────────────────────────
+# Datasets
+# ─────────────────────────────────────────────────────────────────────
+datasets:
+  # Datasets to use in experiments (set active: true/false)
+  available:
+    case_hold:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "case_hold"
+      task: "multi_class"
+      active: true
+    ecthr_a:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "ecthr_a"
+      task: "multi_label"
+      active: true
+    ecthr_b:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "ecthr_b"
+      task: "multi_label"
+      active: true
+    eurlex:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "eurlex"
+      task: "multi_label"
+      active: false
+    ledgar:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "ledgar"
+      task: "multi_class"
+      active: false
+    scotus:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "scotus"
+      task: "multi_class"
+      active: false
+    unfair_tos:
+      hf_name: "coastalcph/lex_glue"
+      hf_config: "unfair_tos"
+      task: "multi_label"
+      active: false
+
+  # Limit samples per split (null = use all)
+  max_train_samples: null  # Use full training dataset
+  max_val_samples: null  # Use full validation dataset
+  max_test_samples: null  # Use full test dataset
+
+# ──────────────────────────────────────+───────────────────────────────
+# Preprocessing
+# ─────────────────────────────────────────────────────────────────────
+preprocessing:
+  max_length: 512
+  truncation: true
+  padding: "max_length"
+  lowercase: false
+  remove_stopwords: true  # Enabled for better feature extraction
+  unicode_normalize: true
+  # Sliding window for long documents
+  sliding_window:
+    enabled: true
+    stride: 256
+    aggregate: "mean"  # mean | max | cls
+
+# ─────────────────────────────────────────────────────────────────────
+# Transformer Models
+# ─────────────────────────────────────────────────────────────────────
+models:
+  transformers:
+    legal_bert:
+      name: "nlpaueb/legal-bert-base-uncased"
+      active: true
+      finetune: false  # Temporarily disabled for faster testing
+    bert:
+      name: "bert-base-uncased"
+      active: true
+    roberta:
+      name: "roberta-base"
+      active: true  # Enabled for comparison
+    deberta:
+      name: "microsoft/deberta-v3-base"
+      active: true  # Enabled - DeBERTa often performs better
+    sentence_bert:
+      name: "sentence-transformers/all-mpnet-base-v2"
+      active: true
+
+  # Transformer fine-tuning
+  training:
+    learning_rate: 3.0e-5
+    batch_size: 16
+    num_epochs: 5
+    warmup_ratio: 0.1
+    weight_decay: 0.01
+    gradient_accumulation_steps: 2
+    fp16: false
+    seed: 42
+
+# ─────────────────────────────────────────────────────────────────────
+# Spike Encoding
+# ─────────────────────────────────────────────────────────────────────
+encoding:
+  time_steps: 75     # Increased time steps for better temporal representation
+  max_memory_gb: 16.0 # Increased memory limit for full dataset processing
+  methods:
+    poisson_rate:
+      enabled: true
+      max_rate: 200  # Higher rate for better information encoding
+    latency:
+      enabled: true
+      tau: 2.0       # Lower time constant for sharper temporal coding
+      normalize: true
+    temporal:
+      enabled: true
+      n_levels: 30  # More quantization levels for finer resolution
+    population:
+      enabled: true
+      n_neurons: 8  # Balanced for memory and performance
+      sigma: 0.25    # Sharper receptive fields
+    binary_threshold:
+      enabled: true
+      percentile: 70.0  # Lower threshold to capture more features
+      adaptive_alpha: 0.3  # More adaptive threshold
+
+# ─────────────────────────────────────────────────────────────────────
+# SNN Model
+# ─────────────────────────────────────────────────────────────────────
+snn:
+  architecture:
+    hidden_size: 512  # Increased for better capacity
+    num_hidden_layers: 4  # Deeper network
+    dropout: 0.3  # Reduced dropout
+    use_residual: true  # Enable residual connections
+  neuron:
+    type: "leaky"    # leaky | synaptic
+    beta: 0.99      # Decay rate (increased for better temporal memory)
+    threshold: 0.7   # Lower threshold for more spiking activity
+    reset_mechanism: "subtract"
+  training:
+    learning_rate: 2.0e-4  # Higher learning rate
+    batch_size: 32  # Larger batch for stability
+    num_epochs: 40  # More epochs
+    optimizer: "adam"
+    scheduler: "cosine"
+    weight_decay: 5.0e-5  # Reduced regularization
+    early_stopping_patience: 12  # More patience
+    seed: 42
+
+# ─────────────────────────────────────────────────────────────────────
+# Evaluation
+# ─────────────────────────────────────────────────────────────────────
+evaluation:
+  metrics:
+    - accuracy
+    - f1_macro
+    - f1_micro
+    - precision_macro
+    - recall_macro
+    - roc_auc
+  semantic:
+    cosine_similarity: true
+    kendall_tau: true
+    spearman_rho: true
+    top_k: [5, 10, 20]
+  energy:
+    mac_energy_pj: 4.6    # pJ per MAC operation (GPU baseline)
+    sop_energy_pj: 0.9    # pJ per SOP (neuromorphic hardware)
+    memory_access_energy_pj: 100.0  # pJ per DRAM access
+  domain_shift:
+    source_dataset: "case_hold"
+    target_datasets:
+      - "ecthr_a"
+      - "ecthr_b"
+    max_samples: 300   # cap per side for the transfer-evaluation stage
+
+# ─────────────────────────────────────────────────────────────────────
+# Visualization
+# ─────────────────────────────────────────────────────────────────────
+visualization:
+  style: "publication"  # publication | presentation | minimal
+  dpi: 300
+  format: "pdf"         # pdf | png | svg
+  colormap: "viridis"
+  figure_width: 8
+  figure_height: 6
+
+# ─────────────────────────────────────────────────────────────────────
+# Reporting
+# ─────────────────────────────────────────────────────────────────────
+reporting:
+  format: "html"        # html | markdown | latex
+  include_figures: true
+  include_tables: true
+  include_raw_numbers: true
